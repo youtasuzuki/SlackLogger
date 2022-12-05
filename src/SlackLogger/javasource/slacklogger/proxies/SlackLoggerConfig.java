@@ -27,6 +27,7 @@ public class SlackLoggerConfig
 		Token("Token"),
 		Channel("Channel"),
 		LogLevel("LogLevel"),
+		PrintStackTrace("PrintStackTrace"),
 		ZoneId("ZoneId"),
 		QueueDepth("QueueDepth"),
 		ProcessInterval("ProcessInterval");
@@ -382,6 +383,42 @@ public class SlackLoggerConfig
 			getMendixObject().setValue(context, MemberNames.LogLevel.toString(), loglevel.toString());
 		else
 			getMendixObject().setValue(context, MemberNames.LogLevel.toString(), null);
+	}
+
+	/**
+	 * @return value of PrintStackTrace
+	 */
+	public final java.lang.Boolean getPrintStackTrace()
+	{
+		return getPrintStackTrace(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of PrintStackTrace
+	 */
+	public final java.lang.Boolean getPrintStackTrace(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.Boolean) getMendixObject().getValue(context, MemberNames.PrintStackTrace.toString());
+	}
+
+	/**
+	 * Set value of PrintStackTrace
+	 * @param printstacktrace
+	 */
+	public final void setPrintStackTrace(java.lang.Boolean printstacktrace)
+	{
+		setPrintStackTrace(getContext(), printstacktrace);
+	}
+
+	/**
+	 * Set value of PrintStackTrace
+	 * @param context
+	 * @param printstacktrace
+	 */
+	public final void setPrintStackTrace(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Boolean printstacktrace)
+	{
+		getMendixObject().setValue(context, MemberNames.PrintStackTrace.toString(), printstacktrace);
 	}
 
 	/**
