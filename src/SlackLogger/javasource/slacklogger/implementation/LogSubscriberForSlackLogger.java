@@ -201,7 +201,9 @@ public class LogSubscriberForSlackLogger extends LogSubscriber {
 						sb.append('[').append(getServerIP()).append(']');
 						sb.append('[').append(logMessage.node.name()).append(']');
 						sb.append('[').append(logMessage.level.name()).append(']');
-						sb.append(' ').append(logMessage.message.toString());
+						if (logMessage.message != null) {
+							sb.append(' ').append(logMessage.message.toString());
+						}
 						if (logMessage.cause != null && myConfig.getPrintStackTrace()) {
 							StringWriter sw = new StringWriter();
 							PrintWriter pw = new PrintWriter(sw);
