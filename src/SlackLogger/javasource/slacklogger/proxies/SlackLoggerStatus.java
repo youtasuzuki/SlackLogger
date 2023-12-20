@@ -28,6 +28,7 @@ public class SlackLoggerStatus
 		LastErrorTime("LastErrorTime"),
 		LastErrorInfo("LastErrorInfo"),
 		OverflowedCount("OverflowedCount"),
+		ExcludedCount("ExcludedCount"),
 		ReconfigRequest("ReconfigRequest");
 
 		private java.lang.String metaName;
@@ -409,6 +410,42 @@ public class SlackLoggerStatus
 	public final void setOverflowedCount(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Long overflowedcount)
 	{
 		getMendixObject().setValue(context, MemberNames.OverflowedCount.toString(), overflowedcount);
+	}
+
+	/**
+	 * @return value of ExcludedCount
+	 */
+	public final java.lang.Long getExcludedCount()
+	{
+		return getExcludedCount(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of ExcludedCount
+	 */
+	public final java.lang.Long getExcludedCount(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.Long) getMendixObject().getValue(context, MemberNames.ExcludedCount.toString());
+	}
+
+	/**
+	 * Set value of ExcludedCount
+	 * @param excludedcount
+	 */
+	public final void setExcludedCount(java.lang.Long excludedcount)
+	{
+		setExcludedCount(getContext(), excludedcount);
+	}
+
+	/**
+	 * Set value of ExcludedCount
+	 * @param context
+	 * @param excludedcount
+	 */
+	public final void setExcludedCount(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Long excludedcount)
+	{
+		getMendixObject().setValue(context, MemberNames.ExcludedCount.toString(), excludedcount);
 	}
 
 	/**

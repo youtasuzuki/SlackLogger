@@ -30,7 +30,8 @@ public class SlackLoggerConfig
 		PrintStackTrace("PrintStackTrace"),
 		ZoneId("ZoneId"),
 		QueueDepth("QueueDepth"),
-		ProcessInterval("ProcessInterval");
+		ProcessInterval("ProcessInterval"),
+		ExcludeRegexp("ExcludeRegexp");
 
 		private java.lang.String metaName;
 
@@ -527,6 +528,42 @@ public class SlackLoggerConfig
 	public final void setProcessInterval(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer processinterval)
 	{
 		getMendixObject().setValue(context, MemberNames.ProcessInterval.toString(), processinterval);
+	}
+
+	/**
+	 * @return value of ExcludeRegexp
+	 */
+	public final java.lang.String getExcludeRegexp()
+	{
+		return getExcludeRegexp(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of ExcludeRegexp
+	 */
+	public final java.lang.String getExcludeRegexp(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.ExcludeRegexp.toString());
+	}
+
+	/**
+	 * Set value of ExcludeRegexp
+	 * @param excluderegexp
+	 */
+	public final void setExcludeRegexp(java.lang.String excluderegexp)
+	{
+		setExcludeRegexp(getContext(), excluderegexp);
+	}
+
+	/**
+	 * Set value of ExcludeRegexp
+	 * @param context
+	 * @param excluderegexp
+	 */
+	public final void setExcludeRegexp(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String excluderegexp)
+	{
+		getMendixObject().setValue(context, MemberNames.ExcludeRegexp.toString(), excluderegexp);
 	}
 
 	/**

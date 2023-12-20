@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.regex.Pattern;
 
 import com.mendix.core.Core;
 import com.mendix.logging.ILogNode;
@@ -44,6 +45,7 @@ public class LogSubscriberForSlackLogger extends LogSubscriber {
 	private Date lastErrorTime;
 	private String lastErrorInfo = "Nothing";
 	private Long overflowedCount = 0L;
+	private Long excludedCount = 0L;
 	private long lastStatusSyncTime = 0L;
 
 
@@ -211,13 +213,21 @@ public class LogSubscriberForSlackLogger extends LogSubscriber {
 							sb.append('\n').append(sw.toString());
 						}
 
-						String error = new SlackMessageSender().sendMessage(myConfig.getToken(), myConfig.getChannel(), sb.toString());
-						if (error == null) {
-							lastProcessResult = "Success";
+						String logmessage = sb.toString();
+						if (myConfig.getExcludeRegexp() != null
+							&& myConfig.getExcludeRegexp().trim().length() > 1
+							&& Pattern.compile(myConfig.getExcludeRegexp().trim()).matcher(logmessage).find()) {
+							lastProcessResult = "Excluded";
+							excludedCount += 1;
 						} else {
-							lastErrorTime = Calendar.getInstance().getTime();
-							lastProcessResult = "Failure";
-							lastErrorInfo = error;
+							String error = new SlackMessageSender().sendMessage(myConfig.getToken(), myConfig.getChannel(), logmessage);
+							if (error == null) {
+								lastProcessResult = "Success";
+							} else {
+								lastErrorTime = Calendar.getInstance().getTime();
+								lastProcessResult = "Failure";
+								lastErrorInfo = error;
+							}
 						}
 					} catch (Exception e) {
 						lastProcessResult = "Failure";
@@ -277,6 +287,7 @@ public class LogSubscriberForSlackLogger extends LogSubscriber {
 			status.setLastErrorTime(lastErrorTime);
 			status.setLastErrorInfo(lastErrorInfo);
 			status.setOverflowedCount(overflowedCount);
+			status.setExcludedCount(excludedCount);
 			status.commit();
 		} catch (Exception e) {
 			logger.error("Status update failed:", e);
