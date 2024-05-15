@@ -31,7 +31,7 @@ public class SlackLoggerStatus
 		ExcludedCount("ExcludedCount"),
 		ReconfigRequest("ReconfigRequest");
 
-		private java.lang.String metaName;
+		private final java.lang.String metaName;
 
 		MemberNames(java.lang.String s)
 		{
@@ -47,15 +47,17 @@ public class SlackLoggerStatus
 
 	public SlackLoggerStatus(com.mendix.systemwideinterfaces.core.IContext context)
 	{
-		this(context, com.mendix.core.Core.instantiate(context, "SlackLogger.SlackLoggerStatus"));
+		this(context, com.mendix.core.Core.instantiate(context, entityName));
 	}
 
 	protected SlackLoggerStatus(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject slackLoggerStatusMendixObject)
 	{
-		if (slackLoggerStatusMendixObject == null)
+		if (slackLoggerStatusMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
-		if (!com.mendix.core.Core.isSubClassOf("SlackLogger.SlackLoggerStatus", slackLoggerStatusMendixObject.getType()))
-			throw new java.lang.IllegalArgumentException("The given object is not a SlackLogger.SlackLoggerStatus");
+		}
+		if (!com.mendix.core.Core.isSubClassOf(entityName, slackLoggerStatusMendixObject.getType())) {
+			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
+		}	
 
 		this.slackLoggerStatusMendixObject = slackLoggerStatusMendixObject;
 		this.context = context;
@@ -73,6 +75,9 @@ public class SlackLoggerStatus
 	/**
 	 * Initialize a proxy using context (recommended). This context will be used for security checking when the get- and set-methods without context parameters are called.
 	 * The get- and set-methods with context parameter should be used when for instance sudo access is necessary (IContext.createSudoClone() can be used to obtain sudo access).
+	 * @param context The context to be used
+	 * @param mendixObject The Mendix object for the new instance
+	 * @return a new instance of this proxy class
 	 */
 	public static slacklogger.proxies.SlackLoggerStatus initialize(com.mendix.systemwideinterfaces.core.IContext context, com.mendix.systemwideinterfaces.core.IMendixObject mendixObject)
 	{
@@ -87,14 +92,16 @@ public class SlackLoggerStatus
 
 	public static java.util.List<slacklogger.proxies.SlackLoggerStatus> load(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String xpathConstraint) throws com.mendix.core.CoreException
 	{
-		java.util.List<slacklogger.proxies.SlackLoggerStatus> result = new java.util.ArrayList<slacklogger.proxies.SlackLoggerStatus>();
-		for (com.mendix.systemwideinterfaces.core.IMendixObject obj : com.mendix.core.Core.retrieveXPathQuery(context, "//SlackLogger.SlackLoggerStatus" + xpathConstraint))
-			result.add(slacklogger.proxies.SlackLoggerStatus.initialize(context, obj));
-		return result;
+		return com.mendix.core.Core.createXPathQuery(String.format("//%1$s%2$s", entityName, xpathConstraint))
+			.execute(context)
+			.stream()
+			.map(obj -> slacklogger.proxies.SlackLoggerStatus.initialize(context, obj))
+			.collect(java.util.stream.Collectors.toList());
 	}
 
 	/**
 	 * Commit the changes made on this proxy object.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit() throws com.mendix.core.CoreException
 	{
@@ -103,6 +110,7 @@ public class SlackLoggerStatus
 
 	/**
 	 * Commit the changes made on this proxy object using the specified context.
+	 * @throws com.mendix.core.CoreException
 	 */
 	public final void commit(com.mendix.systemwideinterfaces.core.IContext context) throws com.mendix.core.CoreException
 	{
@@ -503,9 +511,9 @@ public class SlackLoggerStatus
 	@java.lang.Override
 	public boolean equals(Object obj)
 	{
-		if (obj == this)
+		if (obj == this) {
 			return true;
-
+		}
 		if (obj != null && getClass().equals(obj.getClass()))
 		{
 			final slacklogger.proxies.SlackLoggerStatus that = (slacklogger.proxies.SlackLoggerStatus) obj;
@@ -525,7 +533,7 @@ public class SlackLoggerStatus
 	 */
 	public static java.lang.String getType()
 	{
-		return "SlackLogger.SlackLoggerStatus";
+		return entityName;
 	}
 
 	/**
