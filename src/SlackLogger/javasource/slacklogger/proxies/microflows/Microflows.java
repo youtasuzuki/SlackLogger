@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
+import com.mendix.systemwideinterfaces.core.IMendixObject;
 
 public class Microflows
 {
@@ -32,6 +33,13 @@ public class Microflows
 		params.put("SlackLoggerConfig", _slackLoggerConfig == null ? null : _slackLoggerConfig.getMendixObject());
 		Core.microflowCall("SlackLogger.ACT_SendTestMessage").withParams(params).execute(context);
 	}
+	public static void aCT_TestRegexs(IContext context, slacklogger.proxies.RegexpMatchTester _regexpMatchTester, slacklogger.proxies.SlackLoggerConfig _slackLoggerConfig)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		params.put("RegexpMatchTester", _regexpMatchTester == null ? null : _regexpMatchTester.getMendixObject());
+		params.put("SlackLoggerConfig", _slackLoggerConfig == null ? null : _slackLoggerConfig.getMendixObject());
+		Core.microflowCall("SlackLogger.ACT_TestRegexs").withParams(params).execute(context);
+	}
 	public static boolean aSU_RegisterSlackLogger(IContext context, java.lang.String _configName)
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
@@ -48,5 +56,11 @@ public class Microflows
 	{
 		Map<java.lang.String, Object> params = new HashMap<>();
 		Core.microflowCall("SlackLogger.BSD_ShutdownSlackLoggers").withParams(params).execute(context);
+	}
+	public static slacklogger.proxies.RegexpMatchTester dS_RegexpMatchTester(IContext context)
+	{
+		Map<java.lang.String, Object> params = new HashMap<>();
+		IMendixObject result = (IMendixObject)Core.microflowCall("SlackLogger.DS_RegexpMatchTester").withParams(params).execute(context);
+		return result == null ? null : slacklogger.proxies.RegexpMatchTester.initialize(context, result);
 	}
 }

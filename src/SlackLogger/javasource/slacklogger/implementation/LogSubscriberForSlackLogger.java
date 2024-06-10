@@ -252,6 +252,31 @@ public class LogSubscriberForSlackLogger extends LogSubscriber {
 	}
 
 	/*
+	 *
+	 */
+	public static boolean isTarget(String includeRegex, String excludeRegex, String logmessage) {
+		boolean included = true;
+
+		// check included
+		if (includeRegex != null) {
+			String includes = includeRegex.trim();
+			if (includes.length() > 0) {
+				included = Pattern.compile(includes).matcher(logmessage).find();
+			}
+		}
+
+		// check excluded
+		if (included && excludeRegex != null) {
+			String excludes = excludeRegex.trim();
+			if (excludes.length() > 0) {
+				included = !Pattern.compile(excludes).matcher(logmessage).find();
+			}
+		}
+
+		return included;
+	}
+
+	/*
 	 */
 	private void updateSlackLoggerStatus() {
 		// update SlackLoggerStatus entity
@@ -261,8 +286,8 @@ public class LogSubscriberForSlackLogger extends LogSubscriber {
 		context.startTransaction();
 		try {
 			SlackLoggerStatus status;
-			List<IMendixObject> resultList = Core.retrieveXPathQuery(context,
-					"//SlackLogger.SlackLoggerStatus" + "[ConfigName = '" + myConfig.getConfigName() + "'][IpAddress = '" + getServerIP() + "']");
+			List<IMendixObject> resultList = Core.createXPathQuery(
+					"//SlackLogger.SlackLoggerStatus" + "[ConfigName = '" + myConfig.getConfigName() + "'][IpAddress = '" + getServerIP() + "']").execute(context);
 			if (resultList.size() == 0) {
 				status = new SlackLoggerStatus(context);
 				status.setIpAddress(getServerIP());
@@ -270,8 +295,8 @@ public class LogSubscriberForSlackLogger extends LogSubscriber {
 			} else {
 				status = SlackLoggerStatus.initialize(context, resultList.get(0));
 				if (status.getReconfigRequest()) {
-					List<IMendixObject> configList = Core.retrieveXPathQuery(context,
-							"//SlackLogger.SlackLoggerConfig" + "[ConfigName = '" + myConfig.getConfigName() + "']");
+					List<IMendixObject> configList = Core.createXPathQuery(
+							"//SlackLogger.SlackLoggerConfig" + "[ConfigName = '" + myConfig.getConfigName() + "']").execute(context);
 					if (configList.size() == 1) {
 						stop();
 						configure(SlackLoggerConfig.initialize(context, configList.get(0)));
