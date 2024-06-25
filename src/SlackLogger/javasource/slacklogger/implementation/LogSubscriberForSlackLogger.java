@@ -214,12 +214,7 @@ public class LogSubscriberForSlackLogger extends LogSubscriber {
 						}
 
 						String logmessage = sb.toString();
-						if (myConfig.getExcludeRegexp() != null
-							&& myConfig.getExcludeRegexp().trim().length() > 1
-							&& Pattern.compile(myConfig.getExcludeRegexp().trim()).matcher(logmessage).find()) {
-							lastProcessResult = "Excluded";
-							excludedCount += 1;
-						} else {
+						if (isTarget(myConfig.getIncludeRegexp(), myConfig.getExcludeRegexp(), logmessage)) {
 							String error = new SlackMessageSender().sendMessage(myConfig.getToken(), myConfig.getChannel(), logmessage);
 							if (error == null) {
 								lastProcessResult = "Success";
@@ -228,6 +223,9 @@ public class LogSubscriberForSlackLogger extends LogSubscriber {
 								lastProcessResult = "Failure";
 								lastErrorInfo = error;
 							}
+						} else {
+							lastProcessResult = "Excluded";
+							excludedCount += 1;
 						}
 					} catch (Exception e) {
 						lastProcessResult = "Failure";
