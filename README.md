@@ -13,6 +13,8 @@ A Mendix LogSubscriber implementation to forward log messages to slack.
 * There is no dependencies on other modules and oss jars.
 # Configuration
 * Go to "https://api.slack.com/apps" to create a new slack app and get an OAuth Token.
+*   Click "Create New App" -> Choose "From scratch" -> Specify "App Name" -> Choose "Workspace" -> Click "Create App"
+*    -> Go "OAuth & Permissions" -> Click Scopes "Add on OAuth Scope" ->  Choose "chat:write"  -> Click OAuth Tokens "Install to YourApp" -> Copy "Bot User OAuth Token"
 * Create a screen that snippet calls SNIP_SlackLoggerConfig and set the transfer settings to Slack. You can test the connection to slack here.
 * Call ASU_RegisterSlackLogger in your app's AfterStartup.
 # Restrictions
