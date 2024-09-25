@@ -9,6 +9,7 @@ A Mendix LogSubscriber implementation to forward log messages to slack.
 * Dynamic reconfiguration for cluster environments.
 * Slack connection test.
 * Time zone of log message time can be specified.
+* You can use it with free workspace!
 # Dependencies
 * There is no dependencies on other modules and oss jars.
 # Configuration
