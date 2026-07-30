@@ -12,18 +12,22 @@ package slacklogger.actions;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class TestRegexMatch extends CustomJavaAction<java.lang.Boolean>
+public class TestRegexMatch extends UserAction<java.lang.Boolean>
 {
-	private java.lang.String Regex;
-	private java.lang.String TestString;
+	private final java.lang.String Regex;
+	private final java.lang.String TestString;
 
-	public TestRegexMatch(IContext context, java.lang.String Regex, java.lang.String TestString)
+	public TestRegexMatch(
+		IContext context,
+		java.lang.String _regex,
+		java.lang.String _testString
+	)
 	{
 		super(context);
-		this.Regex = Regex;
-		this.TestString = TestString;
+		this.Regex = _regex;
+		this.TestString = _testString;
 	}
 
 	@java.lang.Override

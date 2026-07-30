@@ -6,7 +6,6 @@ public class UserActionsRegistrar
 {
   public void registerActions(IActionRegistrator registrator)
   {
-    registrator.bundleComponentLoaded();
     registrator.registerUserAction(home.actions.GetXASId.class);
     registrator.registerUserAction(slacklogger.actions.RegisterSlackLogger.class);
     registrator.registerUserAction(slacklogger.actions.SendMessageToSlack.class);

@@ -11,25 +11,29 @@ package slacklogger.actions;
 
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
-import com.mendix.webui.CustomJavaAction;
 import slacklogger.implementation.LogSubscriberForSlackLogger;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class RegisterSlackLogger extends CustomJavaAction<java.lang.Boolean>
+public class RegisterSlackLogger extends UserAction<java.lang.Boolean>
 {
-	private IMendixObject __config;
-	private slacklogger.proxies.SlackLoggerConfig config;
+	/** @deprecated use config.getMendixObject() instead. */
+	@java.lang.Deprecated(forRemoval = true)
+	private final IMendixObject __config;
+	private final slacklogger.proxies.SlackLoggerConfig config;
 
-	public RegisterSlackLogger(IContext context, IMendixObject config)
+	public RegisterSlackLogger(
+		IContext context,
+		IMendixObject _config
+	)
 	{
 		super(context);
-		this.__config = config;
+		this.__config = _config;
+		this.config = _config == null ? null : slacklogger.proxies.SlackLoggerConfig.initialize(getContext(), _config);
 	}
 
 	@java.lang.Override
 	public java.lang.Boolean executeAction() throws Exception
 	{
-		this.config = this.__config == null ? null : slacklogger.proxies.SlackLoggerConfig.initialize(getContext(), __config);
-
 		// BEGIN USER CODE
 		LogSubscriberForSlackLogger subscriber = LogSubscriberForSlackLogger.getInstance(config.getConfigName());
 		if (!subscriber.isStarted()) {

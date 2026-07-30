@@ -4,63 +4,138 @@
 
 package slacklogger.proxies.microflows;
 
-import java.util.HashMap;
-import java.util.Map;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 import com.mendix.systemwideinterfaces.core.IMendixObject;
 
-public class Microflows
+public final class Microflows
 {
 	/**
-	 * @deprecated
-	 * The default constructor of the Microflows class should not be used.
-	 * Use the static microflow invocation methods instead.
+	 * Private constructor to prevent instantiation of this class. 
 	 */
-	@java.lang.Deprecated(since = "9.12", forRemoval = true)
-	public Microflows() {}
+	private Microflows() {}
 
 	// These are the microflows for the SlackLogger module
-	public static void aCT_ReConfigRequest(IContext context, slacklogger.proxies.SlackLoggerStatus _slackLoggerStatus)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_ReConfigRequestBuilder(
+		slacklogger.proxies.SlackLoggerStatus _slackLoggerStatus
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("SlackLoggerStatus", _slackLoggerStatus == null ? null : _slackLoggerStatus.getMendixObject());
-		Core.microflowCall("SlackLogger.ACT_ReConfigRequest").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("SlackLogger.ACT_ReConfigRequest");
+		builder = builder.withParam("SlackLoggerStatus", _slackLoggerStatus);
+		return builder;
 	}
-	public static void aCT_SendTestMessage(IContext context, slacklogger.proxies.SlackLoggerConfig _slackLoggerConfig)
+
+	public static void aCT_ReConfigRequest(
+		IContext context,
+		slacklogger.proxies.SlackLoggerStatus _slackLoggerStatus
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("SlackLoggerConfig", _slackLoggerConfig == null ? null : _slackLoggerConfig.getMendixObject());
-		Core.microflowCall("SlackLogger.ACT_SendTestMessage").withParams(params).execute(context);
+		aCT_ReConfigRequestBuilder(
+				_slackLoggerStatus
+			)
+			.execute(context);
 	}
-	public static void aCT_TestRegexs(IContext context, slacklogger.proxies.RegexpMatchTester _regexpMatchTester, slacklogger.proxies.SlackLoggerConfig _slackLoggerConfig)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_SendTestMessageBuilder(
+		slacklogger.proxies.SlackLoggerConfig _slackLoggerConfig
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("RegexpMatchTester", _regexpMatchTester == null ? null : _regexpMatchTester.getMendixObject());
-		params.put("SlackLoggerConfig", _slackLoggerConfig == null ? null : _slackLoggerConfig.getMendixObject());
-		Core.microflowCall("SlackLogger.ACT_TestRegexs").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("SlackLogger.ACT_SendTestMessage");
+		builder = builder.withParam("SlackLoggerConfig", _slackLoggerConfig);
+		return builder;
 	}
-	public static boolean aSU_RegisterSlackLogger(IContext context, java.lang.String _configName)
+
+	public static void aCT_SendTestMessage(
+		IContext context,
+		slacklogger.proxies.SlackLoggerConfig _slackLoggerConfig
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("ConfigName", _configName);
-		return (java.lang.Boolean) Core.microflowCall("SlackLogger.ASU_RegisterSlackLogger").withParams(params).execute(context);
+		aCT_SendTestMessageBuilder(
+				_slackLoggerConfig
+			)
+			.execute(context);
 	}
-	public static boolean bCO_SlackLoggerConfig(IContext context, slacklogger.proxies.SlackLoggerConfig _slackLoggerConfig)
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_TestRegexsBuilder(
+		slacklogger.proxies.RegexpMatchTester _regexpMatchTester,
+		slacklogger.proxies.SlackLoggerConfig _slackLoggerConfig
+	)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		params.put("SlackLoggerConfig", _slackLoggerConfig == null ? null : _slackLoggerConfig.getMendixObject());
-		return (java.lang.Boolean) Core.microflowCall("SlackLogger.BCO_SlackLoggerConfig").withParams(params).execute(context);
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("SlackLogger.ACT_TestRegexs");
+		builder = builder.withParam("RegexpMatchTester", _regexpMatchTester);
+		builder = builder.withParam("SlackLoggerConfig", _slackLoggerConfig);
+		return builder;
 	}
+
+	public static void aCT_TestRegexs(
+		IContext context,
+		slacklogger.proxies.RegexpMatchTester _regexpMatchTester,
+		slacklogger.proxies.SlackLoggerConfig _slackLoggerConfig
+	)
+	{
+		aCT_TestRegexsBuilder(
+				_regexpMatchTester,
+				_slackLoggerConfig
+			)
+			.execute(context);
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aSU_RegisterSlackLoggerBuilder(
+		java.lang.String _configName
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("SlackLogger.ASU_RegisterSlackLogger");
+		builder = builder.withParam("ConfigName", _configName);
+		return builder;
+	}
+
+	public static boolean aSU_RegisterSlackLogger(
+		IContext context,
+		java.lang.String _configName
+	)
+	{
+		Object result = aSU_RegisterSlackLoggerBuilder(
+				_configName
+			)
+			.execute(context);
+		return (boolean) result;
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder bCO_SlackLoggerConfigBuilder(
+		slacklogger.proxies.SlackLoggerConfig _slackLoggerConfig
+	)
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("SlackLogger.BCO_SlackLoggerConfig");
+		builder = builder.withParam("SlackLoggerConfig", _slackLoggerConfig);
+		return builder;
+	}
+
+	public static boolean bCO_SlackLoggerConfig(
+		IContext context,
+		slacklogger.proxies.SlackLoggerConfig _slackLoggerConfig
+	)
+	{
+		Object result = bCO_SlackLoggerConfigBuilder(
+				_slackLoggerConfig
+			)
+			.execute(context);
+		return (boolean) result;
+	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder bSD_ShutdownSlackLoggersBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("SlackLogger.BSD_ShutdownSlackLoggers");
+		return builder;
+	}
+
 	public static void bSD_ShutdownSlackLoggers(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("SlackLogger.BSD_ShutdownSlackLoggers").withParams(params).execute(context);
+		bSD_ShutdownSlackLoggersBuilder().execute(context);
 	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder dS_RegexpMatchTesterBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("SlackLogger.DS_RegexpMatchTester");
+		return builder;
+	}
+
 	public static slacklogger.proxies.RegexpMatchTester dS_RegexpMatchTester(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		IMendixObject result = (IMendixObject)Core.microflowCall("SlackLogger.DS_RegexpMatchTester").withParams(params).execute(context);
-		return result == null ? null : slacklogger.proxies.RegexpMatchTester.initialize(context, result);
+		Object result = dS_RegexpMatchTesterBuilder().execute(context);
+		return result == null ? null : slacklogger.proxies.RegexpMatchTester.initialize(context, (IMendixObject) result);
 	}
 }

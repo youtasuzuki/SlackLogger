@@ -10,9 +10,9 @@
 package home.actions;
 
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class GetXASId extends CustomJavaAction<java.lang.String>
+public class GetXASId extends UserAction<java.lang.String>
 {
 	public GetXASId(IContext context)
 	{

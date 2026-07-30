@@ -10,10 +10,10 @@
 package slacklogger.actions;
 
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
 import slacklogger.implementation.LogSubscriberForSlackLogger;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class ShutdownSlackLoggers extends CustomJavaAction<java.lang.Boolean>
+public class ShutdownSlackLoggers extends UserAction<java.lang.Boolean>
 {
 	public ShutdownSlackLoggers(IContext context)
 	{

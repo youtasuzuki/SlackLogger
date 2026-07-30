@@ -10,21 +10,26 @@
 package slacklogger.actions;
 
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
 import slacklogger.implementation.SlackMessageSender;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class SendMessageToSlack extends CustomJavaAction<java.lang.String>
+public class SendMessageToSlack extends UserAction<java.lang.String>
 {
-	private java.lang.String token;
-	private java.lang.String channel;
-	private java.lang.String message;
+	private final java.lang.String token;
+	private final java.lang.String channel;
+	private final java.lang.String message;
 
-	public SendMessageToSlack(IContext context, java.lang.String token, java.lang.String channel, java.lang.String message)
+	public SendMessageToSlack(
+		IContext context,
+		java.lang.String _token,
+		java.lang.String _channel,
+		java.lang.String _message
+	)
 	{
 		super(context);
-		this.token = token;
-		this.channel = channel;
-		this.message = message;
+		this.token = _token;
+		this.channel = _channel;
+		this.message = _message;
 	}
 
 	@java.lang.Override

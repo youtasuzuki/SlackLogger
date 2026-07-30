@@ -10,21 +10,26 @@
 package slacklogger.actions;
 
 import com.mendix.systemwideinterfaces.core.IContext;
-import com.mendix.webui.CustomJavaAction;
 import slacklogger.implementation.LogSubscriberForSlackLogger;
+import com.mendix.systemwideinterfaces.core.UserAction;
 
-public class TestRegexMatchAsTarget extends CustomJavaAction<java.lang.Boolean>
+public class TestRegexMatchAsTarget extends UserAction<java.lang.Boolean>
 {
-	private java.lang.String IncludeRegex;
-	private java.lang.String ExcludeRegex;
-	private java.lang.String TestParam;
+	private final java.lang.String IncludeRegex;
+	private final java.lang.String ExcludeRegex;
+	private final java.lang.String TestParam;
 
-	public TestRegexMatchAsTarget(IContext context, java.lang.String IncludeRegex, java.lang.String ExcludeRegex, java.lang.String TestParam)
+	public TestRegexMatchAsTarget(
+		IContext context,
+		java.lang.String _includeRegex,
+		java.lang.String _excludeRegex,
+		java.lang.String _testParam
+	)
 	{
 		super(context);
-		this.IncludeRegex = IncludeRegex;
-		this.ExcludeRegex = ExcludeRegex;
-		this.TestParam = TestParam;
+		this.IncludeRegex = _includeRegex;
+		this.ExcludeRegex = _excludeRegex;
+		this.TestParam = _testParam;
 	}
 
 	@java.lang.Override

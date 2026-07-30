@@ -4,50 +4,76 @@
 
 package home.proxies.microflows;
 
-import java.util.HashMap;
-import java.util.Map;
 import com.mendix.core.Core;
 import com.mendix.systemwideinterfaces.core.IContext;
 
-public class Microflows
+public final class Microflows
 {
 	/**
-	 * @deprecated
-	 * The default constructor of the Microflows class should not be used.
-	 * Use the static microflow invocation methods instead.
+	 * Private constructor to prevent instantiation of this class. 
 	 */
-	@java.lang.Deprecated(since = "9.12", forRemoval = true)
-	public Microflows() {}
+	private Microflows() {}
 
 	// These are the microflows for the Home module
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_GetXASIdBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("Home.ACT_GetXASId");
+		return builder;
+	}
+
 	public static void aCT_GetXASId(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("Home.ACT_GetXASId").withParams(params).execute(context);
+		aCT_GetXASIdBuilder().execute(context);
 	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_SendMessageToSlackTestBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("Home.ACT_SendMessageToSlackTest");
+		return builder;
+	}
+
 	public static void aCT_SendMessageToSlackTest(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("Home.ACT_SendMessageToSlackTest").withParams(params).execute(context);
+		aCT_SendMessageToSlackTestBuilder().execute(context);
 	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_WriteErrorLogBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("Home.ACT_WriteErrorLog");
+		return builder;
+	}
+
 	public static void aCT_WriteErrorLog(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("Home.ACT_WriteErrorLog").withParams(params).execute(context);
+		aCT_WriteErrorLogBuilder().execute(context);
 	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aCT_WriteInfoLogBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("Home.ACT_WriteInfoLog");
+		return builder;
+	}
+
 	public static void aCT_WriteInfoLog(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("Home.ACT_WriteInfoLog").withParams(params).execute(context);
+		aCT_WriteInfoLogBuilder().execute(context);
 	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder aSU_TestAppBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("Home.ASU_TestApp");
+		return builder;
+	}
+
 	public static boolean aSU_TestApp(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		return (java.lang.Boolean) Core.microflowCall("Home.ASU_TestApp").withParams(params).execute(context);
+		Object result = aSU_TestAppBuilder().execute(context);
+		return (boolean) result;
 	}
+	public static com.mendix.core.actionmanagement.MicroflowCallBuilder bSD_TestAppBuilder()
+	{
+		com.mendix.core.actionmanagement.MicroflowCallBuilder builder = Core.microflowCall("Home.BSD_TestApp");
+		return builder;
+	}
+
 	public static void bSD_TestApp(IContext context)
 	{
-		Map<java.lang.String, Object> params = new HashMap<>();
-		Core.microflowCall("Home.BSD_TestApp").withParams(params).execute(context);
+		bSD_TestAppBuilder().execute(context);
 	}
 }

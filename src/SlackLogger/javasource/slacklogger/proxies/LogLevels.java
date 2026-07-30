@@ -6,30 +6,28 @@ package slacklogger.proxies;
 
 public enum LogLevels
 {
-	TRACE(new java.lang.String[][] { new java.lang.String[] { "en_US", "TRACE" } }),
-	DEBUG(new java.lang.String[][] { new java.lang.String[] { "en_US", "DEBUG" } }),
-	INFO(new java.lang.String[][] { new java.lang.String[] { "en_US", "INFO" } }),
-	WARNING(new java.lang.String[][] { new java.lang.String[] { "en_US", "WARNING" } }),
-	ERROR(new java.lang.String[][] { new java.lang.String[] { "en_US", "ERROR" } }),
-	CRITICAL(new java.lang.String[][] { new java.lang.String[] { "en_US", "CRITICAL" } });
+	TRACE("68930b2d-e0fc-452f-8f92-bf8314810914"),
+	DEBUG("1f94be09-36b1-479a-9a38-52556ff20bac"),
+	INFO("758487f6-a7e0-4448-974f-7c052ee01f4f"),
+	WARNING("67415ad9-5b34-4fe8-8540-d4b9005514d6"),
+	ERROR("da094294-3261-44d4-a597-719dcd669913"),
+	CRITICAL("a33a48a0-02c5-4ebb-8bf3-38bde050cef6");
 
-	private final java.util.Map<java.lang.String, java.lang.String> captions;
-
-	private LogLevels(java.lang.String[][] captionStrings)
+	private final java.lang.String i18nCaptionKey;
+	
+	private LogLevels(java.lang.String i18nCaptionKey)
 	{
-		this.captions = new java.util.HashMap<>();
-		for (java.lang.String[] captionString : captionStrings) {
-			captions.put(captionString[0], captionString[1]);
-		}
+		this.i18nCaptionKey = i18nCaptionKey;
 	}
 
 	public java.lang.String getCaption(java.lang.String languageCode)
 	{
-		return captions.getOrDefault(languageCode, "en_US");
+		String caption = com.mendix.core.Core.getInternationalizedString(languageCode, i18nCaptionKey);
+		return caption.isEmpty() ? getCaption() : caption;
 	}
 
 	public java.lang.String getCaption()
 	{
-		return captions.get("en_US");
+		return com.mendix.core.Core.getInternationalizedString("en_US", i18nCaptionKey);
 	}
 }
